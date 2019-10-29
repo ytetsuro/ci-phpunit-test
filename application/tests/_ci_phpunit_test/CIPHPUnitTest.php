@@ -218,6 +218,10 @@ class CIPHPUnitTest
 	public static function loadLoader()
 	{
 		$loader = new self::$loader_class;
+		if (method_exists($loader, 'initialize') && count((new ReflectionMethod($loader, 'initialize'))->getParameters()) === 0) {
+			$loader->initialize();
+		}
+
 		load_class_instance('Loader', $loader);
 	}
 }
